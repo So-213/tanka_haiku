@@ -6,11 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // .env ファイルを読み込む
 
-
-
 const app = express();
-const PORT = 3000;
-
 
 app.use(bodyParser.json());
 app.use(express.static(path.join("public"))); 
@@ -21,17 +17,17 @@ const openai = new OpenAI({
 
 // ルートエンドポイント       
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html')); // process.cwd()でVercelのルートに対応
 });
 
 // POSTエンドポイント
-app.post('/', async(req, res) => {
+app.post('/', async (req, res) => {
   const { text } = req.body;
   if (!text) {
     return res.status(400).json({ error: '文章が空です。' });
   }
 
-  console.log(text)
+  console.log(text);
 
   try {
     const gptResponse = await openai.chat.completions.create({
@@ -44,7 +40,7 @@ app.post('/', async(req, res) => {
 
     const correctedText = gptResponse.choices[0].message.content.trim();
 
-    console.log(correctedText)
+    console.log(correctedText);
 
     res.json({ correctedText }); 
   } catch (error) {
@@ -53,22 +49,5 @@ app.post('/', async(req, res) => {
   }
 });
 
-
-
-// サーバー起動
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-// app.listen(PORT, '0.0.0.0', () => {
-//   console.log(`Server is running on http://0.0.0.0:${PORT}`);
-// });
-
-
-
-
-
-
-
-
-
+// エクスポート（Vercel用）
+export default app;

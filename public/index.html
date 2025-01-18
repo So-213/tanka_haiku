@@ -135,12 +135,12 @@
       resultBubble.textContent = ''; // 結果バブルをリセット
 
       try {
-        //const response = await fetch('http://18.179.207.54:3000', {
-        const response = await fetch('http://localhost:3000', {
+        const response = await fetch(`${process.env.API_URL}/api/server`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text }),
         });
+
 
         if (response.ok) {
           const result = await response.json();
