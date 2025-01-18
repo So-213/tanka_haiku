@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "start": "vercel dev",
-    "build": "vercel build"
+    "build": "echo 'No build step required.'"
   },
   "engines": {
     "node": "22.9.0"
