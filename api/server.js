@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 //   }
 // });
 
-app.post('/', async (req, res) => {
+app.post('/app/server/', async (req, res) => {
   try {
     console.log('POSTリクエストを受信:', req.body);
     const { text } = req.body;
