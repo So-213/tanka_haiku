@@ -59,27 +59,32 @@
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // リクエストの本文からテキストを取得
       const { text } = req.body;
 
-      // テキストが送信されていない場合はエラーを返す
       if (!text) {
         return res.status(400).json({ error: 'テキストが送信されていません。' });
       }
 
-      console.log('Received text:', text); // デバッグ用
+      console.log('Received text:', text);
 
-      // ここにOpenAI APIなどの処理を実装する
-      const result = {
-        message: 'AIによる処理結果がここに表示されます。',
-        receivedText: text,
-      };
+      // GPTの応答を取得
+      const gptResponse = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {"role": "system", "content": "あなたは短歌と俳句の添削専門アシスタントです。ユーザーが送った短歌や俳句に対して、①五七五（俳句）や五七五七七（短歌）の形式を確認し、厳密すぎない柔軟な音数判定を行ってください。②多少の字余りや字足らずは詩的表現として尊重し、自然なリズムであれば指摘しないでください。③良い表現や感情の動きを褒めてみましょう。④返答は130文字程度にまとめてください。⑤ユーザーが短歌や俳句以外のものを送った場合は「短歌や俳句を入力してな」と返してください。"},
+          { role: "user", content: text },
+        ],
+      });
+
+
+      const correctedText = gptResponse.choices[0].message.content.trim();
+      console.log('GPT応答:', correctedText);
 
       // 処理結果をクライアントに返す
-      return res.status(200).json(result);
+      return res.status(200).json(correctedText);
 
     } catch (error) {
-      console.error('Error processing request:', error); // エラーのログ出力
+      console.error('Error processing request:', error); 
       return res.status(500).json({ error: 'サーバーエラーが発生しました。' });
     }
   } else {
