@@ -28,6 +28,13 @@
 // });
 
 
+
+
+
+
+
+
+
 import OpenAI from 'openai';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -43,10 +50,10 @@ app.post('/api/server', async (req, res) => {
   try {
     const { text } = req.body;
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4o',
       messages: [
         { role: 'system', content: 'あなたは短歌と俳句の添削専門アシスタントです。ユーザーが送った短歌や俳句に対して、①五七五（俳句）や五七五七七（短歌）の形式を確認し、厳密すぎない柔軟な音数判定を行ってください。②多少の字余りや字足らずは詩的表現として尊重し、自然なリズムであれば指摘しないでください。③良い表現や感情の動きを褒めてみましょう。④返答は130文字程度にまとめてください。⑤ユーザーが短歌や俳句以外のものを送った場合は「短歌や俳句を入力してな」と返してください。' },
-        { role: 'user', content: text }, // `text` はユーザーからの短歌や俳句
+        { role: 'user', content: text }, 
       ]
     });
     res.json({ response: response.choices[0].message.content });
