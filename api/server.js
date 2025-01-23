@@ -57,15 +57,18 @@ app.post('/api/server', async (req, res) => {
       ]
     });
 
+    // console.log(JSON.stringify(response, null, 2));
 
-
-    const rep = res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
-
-    console.log(rep);
+    // rep = res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
 
 
 
 
+    // AIの返答を取り出す
+    const reply = response?.choices?.[0]?.message?.content || '応答が取得できませんでした';
+
+    // AIの返答をログに表示（返答メッセージのみ）
+    console.log(`AIの返答: ${reply}`);
 
 
 
