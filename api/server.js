@@ -57,25 +57,11 @@ app.post('/api/server', async (req, res) => {
       ]
     });
 
-    // console.log(JSON.stringify(response, null, 2));
-
-    // rep = res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
-
-
-
-
-    // AIの返答を取り出す
     const reply = response?.choices?.[0]?.message?.content || '応答が取得できませんでした';
 
-    // AIの返答をログに表示（返答メッセージのみ）
     console.log(`AIの返答: ${reply}`);
 
-
-
-
-
-
-
+    res.json({ result: reply });
 
   } catch (error) {
     console.error('Error processing request:', error);
