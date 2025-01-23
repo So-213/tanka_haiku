@@ -63,7 +63,7 @@ app.post('/api/server', async (req, res) => {
     // console.log(`AIの返答: ${reply}`);
 
     // res.json({ result: reply });
-    res.json({ result: "AAA"});
+    res.json({ result: "今は返答できないよ。APIを使うにもお金がかかるんじゃ。俳句の感想が欲しいならママにでも聞いてもらったらどうじゃ？"});
 
   } catch (error) {
     console.error('Error processing request:', error);
