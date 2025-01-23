@@ -56,6 +56,9 @@ app.post('/api/server', async (req, res) => {
         { role: 'user', content: text }, 
       ]
     });
+
+    console.log(response)
+
     res.json({ response: response.choices[0].message.content });
   } catch (error) {
     console.error('Error processing request:', error);
