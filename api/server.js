@@ -40,36 +40,3 @@ export default async function handler(req, res) {
 }
 
 
-// import { Configuration, OpenAIApi } from 'openai';
-
-// const configuration = new Configuration({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-
-// const openai = new OpenAIApi(configuration);
-
-// export default async function handler(req, res) {
-//   if (req.method === 'POST') {
-//     try {
-//       const { text } = req.body;
-
-//       if (!text) {
-//         return res.status(400).json({ error: 'テキストが送信されていません。' });
-//       }
-
-//       const completion = await openai.createCompletion({
-//         model: 'gpt-4o',
-//         prompt: `俳句/短歌を添削してください: ${text}`,
-//         max_tokens: 100,
-//       });
-
-//       res.status(200).json({ message: completion.data.choices[0].text.trim() });
-//     } catch (error) {
-//       console.error('Error processing request:', error);
-//       res.status(500).json({ error: 'サーバーエラーが発生しました。' });
-//     }
-//   } else {
-//     res.status(405).json({ error: 'このエンドポイントではPOSTリクエストのみ許可されています。' });
-//   }
-// }
-
