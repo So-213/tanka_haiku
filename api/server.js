@@ -57,9 +57,22 @@ app.post('/api/server', async (req, res) => {
       ]
     });
 
-    console.log(JSON.stringify(response, null, 2));
 
-    res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
+
+    const rep = res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
+
+    console.log(rep);
+
+
+
+
+
+
+
+
+
+
+
 
   } catch (error) {
     console.error('Error processing request:', error);
