@@ -57,9 +57,10 @@ app.post('/api/server', async (req, res) => {
       ]
     });
 
-    console.log(response)
+    console.log(JSON.stringify(response, null, 2));
 
-    res.json({ response: response.choices[0].message.content });
+    res.json({ result: response.choices[0].message?.content || '応答が取得できませんでした' });
+
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).send('Internal Server Error');
