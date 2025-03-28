@@ -48,23 +48,23 @@ const openai = new OpenAI({
 
 app.post('/api/server', async (req, res) => {
   try {
-    // const { text } = req.body;
+    const { text } = req.body;
     
-    // const response = await openai.chat.completions.create({
-    //   model: 'gpt-4o',
-    //   messages: [
-    //     { role: 'system', content: 'あなたは短歌と俳句の添削専門アシスタントです。ユーザーが送った短歌や俳句に対して、①五七五（俳句）や五七五七七（短歌）の形式を確認し、厳密すぎない柔軟な音数判定を行ってください。②多少の字余りや字足らずは詩的表現として尊重し、自然なリズムであれば指摘しないでください。③良い表現や感情の動きを褒めてみましょう。④返答は130文字程度にまとめてください。⑤ユーザーが短歌や俳句以外のものを送った場合は「短歌や俳句を入力してな」と返してください。' },
-    //     { role: 'user', content: text }, 
-    //   ]
-    // });
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [
+        { role: 'system', content: 'あなたは短歌と俳句の添削専門アシスタントです。ユーザーが送った短歌や俳句に対して、①五七五（俳句）や五七五七七（短歌）の形式を確認し、厳密すぎない柔軟な音数判定を行ってください。②多少の字余りや字足らずは詩的表現として尊重し、自然なリズムであれば指摘しないでください。③良い表現や感情の動きを褒めてみましょう。④返答は130文字程度にまとめてください。⑤ユーザーが短歌や俳句以外のものを送った場合は「短歌や俳句を入力してな」と返してください。' },
+        { role: 'user', content: text }, 
+      ]
+    });
 
-    // const reply = response?.choices?.[0]?.message?.content || '応答が取得できませんでした';
+    const reply = response?.choices?.[0]?.message?.content || '応答が取得できませんでした';
 
-    // console.log(`AIの返答: ${reply}`);
+    console.log(`AIの返答: ${reply}`);
 
-    // res.json({ result: reply });
+    res.json({ result: reply });
     
-    res.json({ result: "今は返答できないよ。APIを使うにもお金がかかるんじゃ。俳句の感想が欲しいならママにでも聞いてもらったらどうじゃ？"});
+    // res.json({ result: "今は返答できないよ。APIを使うにもお金がかかるんじゃ。俳句の感想が欲しいならママにでも聞いてもらったらどうじゃ？"});
 
   } catch (error) {
     console.error('Error processing request:', error);
